@@ -33,5 +33,5 @@ re: fclean all
 unit:
 	$(CC) -o unit_tests $(SRC) tests/test_my_strcpy.c --coverage -lcriterion
 
-test: unit
+tests_run: unit
 	./unit_tests | gcovr --exclude tests/ --branches
