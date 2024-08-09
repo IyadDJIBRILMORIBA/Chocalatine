@@ -24,3 +24,16 @@ jobs:
         run: check.sh $(pwd) $(pwd)
       - name: Display coding style report
         run: cat $(pwd)/coding-style-reports.log
+
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: test_compilation
+        run: make
+      - name: test_other
+        run: make clean
+
