@@ -14,13 +14,13 @@ env:
 
 jobs:
   check_coding_style:
-    run-on: unbutu-latest
+    runs-on: ubuntu-latest
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-        - name: checkout
-          uses: actions/checkout@v4
-        - name: run-commande
-          run: check.sh $(pwd) $(pwd)
-        - name: display-it
-          run: cat $(pwd)/coding-style-report.log
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run coding style check
+        run: check.sh $(pwd) $(pwd)
+      - name: Display coding style report
+        run: cat $(pwd)/coding-style-report.log
