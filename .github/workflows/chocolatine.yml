@@ -64,4 +64,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Run unit tests
-        run
+        run: make unit
+      - name: Run all tests
+        run: make tests_run
