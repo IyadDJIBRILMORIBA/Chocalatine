@@ -17,9 +17,9 @@ jobs:
     run-on: unbutu-latest
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
-      steps:
-      - name: checkout
-        uses: actions/checkout@v4
-        run: check.sh $(pwd) $(pwd)
-        uses: actions/checkout@v4
-        run: cat $(pwd)/coding-style-report.log
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      run: check.sh $(pwd) $(pwd)
+      uses: actions/checkout@v4
+      run: cat $(pwd)/coding-style-report.log
