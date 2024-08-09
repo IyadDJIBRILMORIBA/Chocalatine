@@ -20,5 +20,7 @@ jobs:
     steps:
         - name: checkout
           uses: actions/checkout@v4
-        run: check.sh $(pwd) $(pwd)
-        run: cat $(pwd)/coding-style-report.log
+        - name: run-commande
+          run: check.sh $(pwd) $(pwd)
+        - name: display-it
+          run: cat $(pwd)/coding-style-report.log
