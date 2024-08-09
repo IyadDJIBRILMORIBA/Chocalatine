@@ -9,8 +9,8 @@ on:
       - 'ga-ignore-**'
 
 env:
-  MIRROR_URL: 'git@github.com:EpitechPromo2028/B-DOP-200-COT-2-2-chocolatine-iyad.djibril-moriba.git'
-  EXECUTABLES: 'mysh,directory1/executableA,directory2/executableB'
+  MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-COT-2-2-chocolatine-iyad.djibril-moriba.git"
+  EXECUTABLES: "mysh,directory1/executableA,directory2/executableB"
 
 jobs:
   check_coding_style:
@@ -18,8 +18,7 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-    - name: checkout
-      uses: actions/checkout@v4
-      run: check.sh $(pwd) $(pwd)
-      uses: actions/checkout@v4
-      run: cat $(pwd)/coding-style-report.log
+        - name: checkout
+          uses: actions/checkout@v4
+        run: check.sh $(pwd) $(pwd)
+        run: cat $(pwd)/coding-style-report.log
