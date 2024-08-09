@@ -23,17 +23,16 @@ jobs:
       - name: Run coding style check
         run: check.sh $(pwd) $(pwd)
       - name: Display coding style report
-        run:  |
-          CODING_STYLE_ERROR=$(pwd)/coding-style-reports.log
-          for ERRORS in $CODING_STYLE_ERROR; do
-              array=(echo $ERRORS | sed 's/:/\n/g')
-              echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
-          done
-          if[[-n $CODING_STYLE_ERRORS]]
-          then
+        run: |
+          CODING_STYLE_ERRORS=$(pwd)/coding-style-reports.log
+          while IFS= read -r line; do
+            array=($(echo "$line" | sed 's/:/\n/g'))
+            echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
+          done < "$CODING_STYLE_ERRORS"
+          if [[ -s "$CODING_STYLE_ERRORS" ]]; then
             exit 1
           else
-            echo No coding style errors detected
+            echo "No coding style errors detected"
           fi
 
   check_program_compilation:
@@ -44,17 +43,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: test_compilation
+      - name: Test compilation
         run: make
-      - name: test_other
+      - name: Test executables
         run: |
-           OIFS = $IFS
-           IFS=','
-           for x in $EXECUTABLES
-              do
-               ./$x $ARGUMENTS
-              done
-            IFS=$OIFS
+          OIFS=$IFS
+          IFS=','
+          for x in $EXECUTABLES; do
+            ./$x $ARGUMENTS
+          done
+          IFS=$OIFS
 
   run_tests:
     needs: [check_program_compilation]
@@ -65,8 +63,5 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: test_compilation
-        run: make unit
-      - name: make_unit_test
-        run: make tests_run
-
+      - name: Run unit tests
+        run
