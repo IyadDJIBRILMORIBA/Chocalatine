@@ -37,3 +37,16 @@ jobs:
       - name: test_other
         run: make clean
 
+  make tests_run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: test_compilation
+        run: make unit
+      - name: make_unit_test
+        run: make test
+
