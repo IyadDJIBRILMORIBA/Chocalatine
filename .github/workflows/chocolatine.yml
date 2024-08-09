@@ -39,6 +39,7 @@ jobs:
         run: make clean
 
   run_tests:
+    needs: [check_program_compilation]
     runs-on: ubuntu-latest
     timeout-minutes: 2
     container:
