@@ -21,13 +21,12 @@ char *my_strcpy(char *dest, char const *src)
     return (dest);
 }
 
-int main()
+int main(int ac, char **av)
 {
     char my_string[] = "Hello, World!";
     char copied_string[50];
 
     printf("Original string: %s\n", my_string);
-
     printf("Copied string: %s\n", my_strcpy(copied_string, my_string));
     return 0;
 }
